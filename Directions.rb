@@ -10,10 +10,11 @@ module Directions
      def returnDirections()
           value = ""
           
-          for str in @directions
-            val << (str + ", ")
-          end
-       
+          @directions.each {
+            | str |
+            value << (str + ", ")
+          }
+          
        return value
      end
        
