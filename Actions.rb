@@ -10,10 +10,11 @@ module Actions
    def returnActions()
        value = ""
           
-          for str in @actions
-            val << (str + ", ")
-          end
-       
+          @actions.each {
+            | str |
+            value << (str + ", ")
+          }
+          
        return value
    end
 end

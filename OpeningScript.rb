@@ -10,7 +10,7 @@ class StoryPoint
   attr_reader :description
   
   def initialize (pDiscription, pLocation)
-  @description = pText
+  @description = pDiscription
   @location = pLocation
   end
   
@@ -19,11 +19,14 @@ class StoryPoint
   end
   
   def tellActions()
-    return "You can go the following actions #{returnActions()}"
+    return "You can do the following actions #{returnActions()}"
   end
   
   def tellStoryNode()
-    
+    totalStory = "#{@description } #{@location} \n"
+    totalStory += "#{tellDirections()} \n "
+     totalStory += "#{tellActions()}"
+    puts(totalStory)
   end
 end
 
@@ -31,10 +34,11 @@ class StoryEngine
     @@numberOfStoryPoints = 0
 end
 
-myStory = StoryPoint.new("You enter a villiage")
+myStory = StoryPoint.new("The Fog rises and you find your self in ", "the ancient village of SummerSmith")
 myStory.directions = [Directions::EAST,Directions::SOUTH,Directions::NORTH,Directions::WEST];
 myStory.actions= [Actions::FIGHT,Actions::TALK];
 
-puts("The Story so far is #{myStory.description}")
-puts("The Story so far is #{myStory.tellStory}")
+puts("#{myStory.tellStoryNode}")
+
+
 
