@@ -4,7 +4,8 @@ module Actions
    TALK = "talk"
    FIGHT = "fight"
    GRAB = "get"
-  
+   RESTART = "RestartTheGame"
+   
    attr_accessor :actions
    
    def returnActions()
