@@ -1,8 +1,9 @@
 #This is the Main Engine for the StoryPoints
-require_relative "StoryPoint.rb","StoryPointReference.rb"
+require_relative "StoryPoint.rb"
+require_relative "StoryPointReference.rb"
 
 class StoryEngine
-    include StoryPoint, StoryPointReference
+    include StoryPointReference
     
     @@numberOfStoryPoints = 0
    
@@ -11,7 +12,7 @@ class StoryEngine
     
     # StoriesPoints are stored in a Hash Based on Reference
     def initialize ()
-     @stories =  Hash.new(new StoryPoint("Unstable Story: Please Restart", Actions::RESTART, "Restart0"))
+     @stories =  Hash.new()
     end
     
     def addStory (newStoryPoint)
@@ -27,24 +28,52 @@ class StoryEngine
         end
     end
     
-    def startStoryEngine
+    def setStoryPointEngine(reference)
+        @curStoryPoint = getStoryPoint(reference)
+        startSequence()
+    end
+    
+    def startSequence()
+        @curStoryPoint.tellStoryNode()
+        nextReference = checkUserAction()
+        puts ("UserNext Action is #{nextReference}")
+        setStoryPointEngine(nextReference)
+    end
+    
+    def checkUserAction()
+       begin
+           playerAction = gets.chomp().to_s
+           puts("TESTING --> #{playerAction}")
+           if (@curStoryPoint.logicGrid[playerAction] != nil)
+                  realAction =  @curStoryPoint.logicGrid[playerAction]
+            elsif (playerAction == Actions::HELP)
+                puts ("Current Actions are: #{@curStoryPoint.tellActions()}")  
+            else
+                puts("Please Enter an allowed action or direction: ?")  
+            end
+       end until  realAction != nil
+      
+      return realAction
+    end
+    
+    
+    
 end
 
 
 myStoryEngine = StoryEngine.new();
 
 #GET THE ENGINE READY
-myStory = StoryPoint.new("Out of the Rising Fog you find your self in Harmersmith", StoryPointReference::TN0)
+myStory = StoryPoint.new("Out of the Rising Fog you find your self in Harmersmith", StoryPointReference::TN1)
 myStory.directions = [Directions::EAST,Directions::SOUTH,Directions::NORTH,Directions::WEST];
-myStory.setLocationGrid = {Directions::EAST=>StoryPointReference::TN2,Directions::NORTH=>StoryPointReference::TN1,Directions::WEST=>StoryPointReference::TN3}
+myStory.logicGrid = {Directions::EAST=>StoryPointReference::TN2,Directions::NORTH=>StoryPointReference::TN3,Directions::WEST=>StoryPointReference::TN4}
 myStoryEngine.addStory(myStory)
 
 myStory2 = StoryPoint.new("You Stand in front of an old rundown church to some forgoten Eldar God", StoryPointReference::TN2)
 myStory2.directions = [Directions::WEST];
-myStory2.setLocationGrid = {Directions::WEST=>StoryPointReference::TN0}
+myStory2.logicGrid = {Directions::WEST=>StoryPointReference::TN1}
 myStoryEngine.addStory(myStory2)
-# puts("#{myStory.tellStoryNode}")
-# puts("#{myStory.reference}")
 
+myStoryEngine.setStoryPointEngine(StoryPointReference::TN1)
 
 

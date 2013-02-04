@@ -1,9 +1,10 @@
 #List all the StoryPoints Locations
 
-module StoryReferences
-    TN0 = "town_start"
-    TN1 = "pub"
-    TN2 = "church"
-    TN3 = "graveyard enterence"
-    _
+module StoryPointReference
+    TN0 = "Restart"
+    TN1 = "town_start"
+    TN2 = "pub"
+    TN3 = "church"
+    TN4 = "graveyard enterence"
+
 end

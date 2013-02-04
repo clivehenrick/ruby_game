@@ -5,6 +5,7 @@ module Actions
    FIGHT = "fight"
    GRAB = "get"
    RESTART = "RestartTheGame"
+   HELP = "help"
    
    attr_accessor :actions
    

@@ -8,25 +8,22 @@ class StoryPoint
   
   attr_reader :description
   attr_reader :reference
-  attr_reader :logicGrid
+  attr_accessor :logicGrid
   
     def initialize (discription, reference)
         @description = discription
         @reference = reference
         @logicGrid = Hash.new()
+        @actions = [Actions::HELP]
     end
-  
-  #Will Merge Locations with Next Location Grid
-    def setLocationGrid(logicGrid)
-        @logicGrid = logicGrid 
-    end
+    
     
     def tellDirections()
         return "You can go the following directions: #{returnDirections()}"
     end
     
     def tellActions()
-        return "You can do the following actions #{returnActions()}"
+        return "You can do the following actions #{returnActions()} and #{Actions::HELP}"
     end
   
   def tellStoryNode()
