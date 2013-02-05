@@ -3,7 +3,7 @@ require_relative "StoryPoint.rb"
 require_relative "StoryPointReference.rb"
 
 class StoryEngine
-    include StoryPointReference
+    #include StoryPointReference
     
     @@numberOfStoryPoints = 0
    
@@ -44,14 +44,14 @@ class StoryEngine
        begin
            playerAction = gets.chomp().to_s
            puts("TESTING --> #{playerAction}")
-           if (@curStoryPoint.logicGrid[playerAction] != nil)
+           if (@curStoryPoint.logicGrid[playerAction])
                   realAction =  @curStoryPoint.logicGrid[playerAction]
-            elsif (playerAction == Actions::HELP)
+           elsif (playerAction == Actions::HELP)
                 puts ("Current Actions are: #{@curStoryPoint.tellActions()}")  
-            else
+           else
                 puts("Please Enter an allowed action or direction: ?")  
             end
-       end until  realAction != nil
+       end until  realAction
       
       return realAction
     end

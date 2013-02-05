@@ -5,6 +5,8 @@ module Directions
    NORTH = "n" 
    SOUTH = "s"
    
+   #RUBY SYMBOLS
+   
      attr_accessor :directions
      
      def returnDirections()
