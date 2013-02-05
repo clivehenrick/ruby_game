@@ -1,3 +1,4 @@
+
 class Turn
 	def initialize(story_point)
     @story_point = story_point		
