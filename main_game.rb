@@ -13,7 +13,7 @@ require_relative "lib/engine.rb"
 myStoryEngine = Engine::StoryEngine.new();
 
 myStoryEngine.allow_users_enter_story_point();
-myStoryEngine.setStoryPointEngine("forest")
+
 
 # 
 # 

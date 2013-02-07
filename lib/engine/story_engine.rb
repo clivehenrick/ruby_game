@@ -85,6 +85,8 @@ module Engine
         story_point.directions= directions_list
         story_point.logicGrid= pairs
         add_story(story_point)
+        
+        set_story_point_engine(story_point.reference)
       end
   end
   
