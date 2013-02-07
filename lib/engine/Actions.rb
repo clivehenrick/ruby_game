@@ -6,6 +6,7 @@ module Actions
    GRAB = "get"
    RESTART = "RestartTheGame"
    HELP = "help"
+   CREATE = "create"
    
    attr_accessor :actions
    

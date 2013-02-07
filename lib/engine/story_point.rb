@@ -3,7 +3,7 @@
 require_relative "Actions.rb"
 require_relative "Directions.rb"
 
-module Node
+module Engine
   class StoryPoint
     include Actions, Directions
     
@@ -24,7 +24,8 @@ module Node
       end
       
       def tellActions()
-          return "You can do the following actions #{returnActions()} and #{Actions::HELP}"
+          return "You can do the following actions #{returnActions()}
+           plus #{Actions::HELP} , #{Actions::CREATE}"
       end
     
     def tellStoryNode()

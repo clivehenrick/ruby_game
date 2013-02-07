@@ -5,6 +5,8 @@ module Directions
    NORTH = "n" 
    SOUTH = "s"
    
+   DIRECTIONS = ['s','w','e','n'].freeze
+   
    #RUBY SYMBOLS
    
      attr_accessor :directions
