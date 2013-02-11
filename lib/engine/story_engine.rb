@@ -45,8 +45,8 @@ module Engine
          begin
              playerAction = gets.chomp().to_s
              puts("TESTING --> #{playerAction}")
-             if (@current_story_point.logicGrid[playerAction])
-                    realAction =  @current_story_point.logicGrid[playerAction]
+             if (@current_story_point.logic_grid[playerAction])
+                    realAction =  @current_story_point.logic_grid[playerAction]
              elsif (playerAction == Actions::HELP)
                   puts("Current Actions are: #{@current_story_point.tellActions()}")  
              elsif (playerAction == Actions::CREATE)
@@ -84,7 +84,7 @@ module Engine
         
         story_point = Engine::StoryPoint.new(discription,reference)
         story_point.directions= directions_list
-        story_point.logicGrid= pairs
+        story_point.logic_grid= pairs
         add_story(story_point)
         
         set_story_point_engine(story_point.reference)
@@ -93,11 +93,17 @@ module Engine
       #Convert the StoryPointsHash to YAML Ready Format
       def dump (story_point)
         @game_saver.save(story_point.dump())
-          
       end
       def dump_all_stories()
           
       end
+      
+      def load_stories()
+        saved_stories = @game_saver .load_stories()
+        loaded_story_point = StoryPoint.load(saved_stories)
+        loaded_story_point.tellStoryNode()
+      end
+      
       def get_stories_saved ()
         
       end

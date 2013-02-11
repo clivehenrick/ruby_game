@@ -16,7 +16,7 @@ module Engine
     def save(story_point_yaml)
       #contents = @game_engine.dump
       puts(story_point_yaml)
-      File.open(save_file,'w') {
+      File.open(save_file_stories,'w') {
         |f|
         f.write(story_point_yaml)
       }
@@ -27,14 +27,24 @@ module Engine
       
     end
     
-    def load!
-      raise Exception.new("no file to load!") unless File.exists?(save_file)
-      state = YAML::load(save_file)
+     def load_game_state!
+      raise Exception.new("no file to load!") unless File.exists?(save_file_game_state)
+      state = YAML::load(save_file_game_state)
       GameState.new(state)
     end
+    
+    def load_stories!
+      raise Exception.new("no file to load!") unless File.exists?(save_file_stories)
+      stories = YAML::load(save_file_stories)
+      return stories
+    end
 
-    def save_file
-      "/home/clive/file.yml"
+    def save_file_game_state
+      return "/home/clive/file.yml"
+    end
+    
+    def save_file_stories
+      return "stories.yml"
     end
 
 ###### /missing implementation

@@ -9,12 +9,12 @@ module Engine
     
     attr_reader :description
     attr_reader :reference
-    attr_accessor :logicGrid
+    attr_accessor :logic_grid
     
       def initialize (discription, reference)
           @description = discription
           @reference = reference
-          @logicGrid = Hash.new()
+          @logic_grid = Hash.new()
           @actions = [Actions::HELP]
       end
       
@@ -36,8 +36,16 @@ module Engine
     end
     
     def dump
-      array = [@description,@reference,@logicGrid,@actions,@directions].to_yaml
+      array = [@description,@reference,@logic_grid,@actions,@directions].to_yaml
       return array
+    end
+    
+    def load (array)
+      newStory = this.new(array[0], array[1])
+      newStory.logic_grid= array[2]
+      newStory.actions = array[3]
+      newStory.directions = array[4]
+      return newStory
     end
   end 
 end
