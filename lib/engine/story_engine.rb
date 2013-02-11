@@ -1,6 +1,6 @@
 require_relative "story_point.rb"
 require_relative "story_point_reference.rb"
-
+require_relative "story_data_save.rb"
 
 module Engine
     class StoryEngine
@@ -13,6 +13,7 @@ module Engine
       # StoriesPoints are stored in a Hash Based on Reference
       def initialize ()
        @stories =  Hash.new()
+       @game_saver = Engine::GameSaver.new()
       end
       
       def add_story (newStoryPoint)
@@ -87,6 +88,18 @@ module Engine
         add_story(story_point)
         
         set_story_point_engine(story_point.reference)
+      end
+      
+      #Convert the StoryPointsHash to YAML Ready Format
+      def dump (story_point)
+        @game_saver.save(story_point.dump())
+          
+      end
+      def dump_all_stories()
+          
+      end
+      def get_stories_saved ()
+        
       end
   end
   

@@ -1,19 +1,30 @@
 require_relative "story_point.rb"
+require_relative "story_engine.rb"
 
 module Engine
   class GameSaver
    
     require "yaml"
 
+    attr_reader :save_file
 ###### missing implementation
     
-    def initialize(game_state) 
-      @game_state = game_state
+    def initialize() 
+     
     end
 
-    def save!
-      contents = @game_state.dump
-      YAML::dump(save_file, contents)
+    def save(story_point_yaml)
+      #contents = @game_engine.dump
+      puts(story_point_yaml)
+      File.open(save_file,'w') {
+        |f|
+        f.write(story_point_yaml)
+      }
+      #YAML::dump(save_file, story_point_yaml)
+    end
+    
+    def save_all(all_stories_yml)
+      
     end
     
     def load!
@@ -42,14 +53,14 @@ module Engine
     end
 
     def saveDB
-      File.open ($fn, 'w') {
-        |f|
-        f.write($storyPlots.to_yaml)
-      }  
+      # File.open ($fn, 'w') {
+        # |f|
+        # f.write($storyPlots.to_yaml)
+      # }  
     end
     
     def loadDB
-      input_data = File.read ()
+      # input_data = File.read ()
     end
 
 

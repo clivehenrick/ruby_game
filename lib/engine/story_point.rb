@@ -34,6 +34,11 @@ module Engine
         totalStory += "#{tellActions()}"
         puts(totalStory)
     end
+    
+    def dump
+      array = [@description,@reference,@logicGrid,@actions,@directions].to_yaml
+      return array
+    end
   end 
 end
 
