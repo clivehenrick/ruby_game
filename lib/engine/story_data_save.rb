@@ -16,10 +16,7 @@ module Engine
     def save(story_point_yaml)
       #contents = @game_engine.dump
       puts(story_point_yaml)
-      File.open(save_file_stories,'w') {
-        |f|
-        f.write(story_point_yaml)
-      }
+      File.open(save_file_stories,'w') { |f| f.write(story_point_yaml) }
       #YAML::dump(save_file, story_point_yaml)
     end
     
@@ -35,7 +32,7 @@ module Engine
     
     def load_stories!
       raise Exception.new("no file to load!") unless File.exists?(save_file_stories)
-      stories = YAML::load(save_file_stories)
+      stories = YAML::load_file(save_file_stories)
       return stories
     end
 

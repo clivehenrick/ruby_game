@@ -7,17 +7,21 @@ module Engine
   class StoryPoint
     include Actions, Directions
     
-    attr_reader :description
-    attr_reader :reference
+    attr_accessor :description
+    attr_accessor :reference
     attr_accessor :logic_grid
     
-      def initialize (discription, reference)
+      def initialize (discription = "", reference = "")
           @description = discription
           @reference = reference
           @logic_grid = Hash.new()
           @actions = [Actions::HELP]
       end
       
+      def intialize (hsh)
+        puts("THis was called")
+        super        
+      end
       
       def tellDirections()
           return "You can go the following directions: #{returnDirections()}"
@@ -36,16 +40,20 @@ module Engine
     end
     
     def dump
-      array = [@description,@reference,@logic_grid,@actions,@directions].to_yaml
-      return array
+      hash = {:description => @description,:reference =>@reference,:logic_grid => @logic_grid,:actions => @actions,:description => @directions}.to_yaml
+      return hash
     end
     
-    def load (array)
-      newStory = this.new(array[0], array[1])
-      newStory.logic_grid= array[2]
-      newStory.actions = array[3]
-      newStory.directions = array[4]
-      return newStory
+    #dump[:description]
+    
+    def load (loadedHash)
+      
+      @description = loadedHash[:description]
+      @reference =  loadedHash[:reference]
+      @logic_grid = loadedHash[:logic_grid]
+      @actions = loadedHash[:actions]
+      @directions = loadedHash[:description]
+      return this
     end
   end 
 end

@@ -94,14 +94,19 @@ module Engine
       def dump (story_point)
         @game_saver.save(story_point.dump())
       end
+      
       def dump_all_stories()
           
       end
       
       def load_stories()
-        saved_stories = @game_saver .load_stories()
-        loaded_story_point = StoryPoint.load(saved_stories)
-        loaded_story_point.tellStoryNode()
+        saved_stories = @game_saver.load_stories!()
+        p("LOADED STORY==> \n #{saved_stories.inspect}")
+
+        new_story_point = Engine::StoryPoint.new(saved_stories)
+        abort new_story_point.inspect                
+        #new_story_point.load(saved_stories)
+       # new_story_point.tellStoryNode()
       end
       
       def get_stories_saved ()
